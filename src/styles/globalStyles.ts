@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 const MyGlobalStyles = createGlobalStyle`
 
@@ -10,8 +10,8 @@ const MyGlobalStyles = createGlobalStyle`
 
     body{
         background-color: #F3F3F3;
+        font-family: 'Manrope', sans-serif;
     }
+`;
 
-`
-
-export default  MyGlobalStyles
+export default  MyGlobalStyles;
