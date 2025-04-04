@@ -1,10 +1,12 @@
+import Header from "../../components/Header/Header";
 import Sidebar from "../../components/SideBar/SideBar";
 
 
 const Home = () => {
     return(
         <div>
-          <Sidebar />
+          <Header/>
+          <Sidebar/>
         </div>
     );
 };
