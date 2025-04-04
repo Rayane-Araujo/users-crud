@@ -28,7 +28,7 @@ export const ToggleButton = styled.div`
   top: 20px;
   right: -15px;
   background-color: #F2F2F2;
-  color: #0000002C;
+  color: #808080;
   padding: 5px;
   border-radius: 50%;
   cursor: pointer;
