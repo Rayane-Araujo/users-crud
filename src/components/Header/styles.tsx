@@ -7,7 +7,6 @@ export const HeaderContainer = styled.header`
   padding: 1rem;
   display: flex;
   justify-content: flex-end;
-  position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: absolute;
 `;
