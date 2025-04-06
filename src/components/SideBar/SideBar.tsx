@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 
 import logoFull from "../../assets/logoFull.svg";
@@ -22,6 +23,7 @@ import { FaAngleUp, FaAngleDown } from "react-icons/fa6";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [accessOpen, setAccessOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <SidebarContainer isOpen={isOpen}>
@@ -31,15 +33,15 @@ const Sidebar = () => {
       <Logo   isOpen={isOpen} />
        <img src={isOpen ? logoFull : logoMini} alt="logo" />
       <Menu>
-        <MenuItem isOpen={isOpen} hoverable active>
-        <img src={HomeIcon} alt="Home icon" /> <MenuText isOpen={isOpen}>Home</MenuText>
+        <MenuItem onClick={() => navigate('/')} isOpen={isOpen} hoverable active>
+          <img src={HomeIcon} alt="Home icon" /> <MenuText isOpen={isOpen}>Home</MenuText>
         </MenuItem>
         <MenuItem isOpen={isOpen} hoverable accessToggle onClick={() => setAccessOpen(!accessOpen)}>
           <img src={ProfileIconFilled} alt="Profile icon" /> <MenuText isOpen={isOpen}>Controle de Acesso</MenuText>
           {isOpen && (accessOpen ? <FaAngleUp style={{ marginLeft: "auto" }} /> : <FaAngleDown style={{ marginLeft: "auto" }} />)}
         </MenuItem>
         <SubMenu isOpen={accessOpen}>
-          <MenuItem isOpen={isOpen} hoverable active>
+          <MenuItem onClick={() => navigate('/usuarios')} isOpen={isOpen} hoverable active>
             <img src={Users} alt="Users icon" /> <MenuText isOpen={isOpen}>Usuários</MenuText>
           </MenuItem>
         </SubMenu>

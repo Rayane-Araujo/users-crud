@@ -11,7 +11,6 @@ const MyGlobalStyles = createGlobalStyle`
     body{
         background-color: #F3F3F3;
         font-family: 'Manrope', sans-serif;
-        overflow: hidden;
     }
 `;
 
