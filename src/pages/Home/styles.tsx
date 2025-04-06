@@ -10,12 +10,13 @@ export const Content = styled.div`
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: space-between;
+  margin-top: 2rem;
 `;
 
 export const Title = styled.h1`
   font-size: 24px;
-  margin-top: 5%;
+  margin-top: 2rem;
   color: #0d1931;
 `;
 
