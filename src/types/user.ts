@@ -2,7 +2,7 @@ export interface UserData {
     id: any;
     nome: string;
     email: string;
-    avatar: string;
+    avatar?: string;
 }
 
 
