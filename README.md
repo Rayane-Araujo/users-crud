@@ -1,54 +1,62 @@
-# React + TypeScript + Vite
+# CRUD  de usuários
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sobre o Projeto
 
-Currently, two official plugins are available:
+Projeto frontend CRUD completo para gerenciamento de usuários em React, que permite aos usuários cadastrar, editar ou deletar os seus dados do cadastro.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **CRUD - Create, Read, Update e Delete**: Os usuários podem fazer cadastro, editar ou deletar interagindo na interface da aplicação.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Desenvolver uma interface de usuário e suas validações.
+- Tela de Apresentação (HOME).
+- Lista de usuários: pesquisa por nome e paginação.
+- Cadastro de usuários:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  1. Nome - Apenas Letras
+  2. Email - Apenas e-mails válidos
+  3. Matrícula - Apenas Números
+  4. Senha - Alfanuméricos de 6 dígitos
+  5. Habilitar botão de salvar apenas quando todos os campos forem válidos.
+  6. Todos os campos são obrigatórios
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Pré-requisitos
+
+- Node.js
+- npm (Node Package Manager)
+
+## Iniciando  o Projeto
+Para iniciar a Aplicação em sua máquina local, siga os passos abaixo:
+
+### Clone o repositório
+    
+
+    https://github.com/rayane-araujo/users-crud
+
+    
+
+### Entre na pasta do projeto
+
+    cd users-crud
+
+### Instale as dependências
+
+    npm install
+
+### Inicie a aplicação
+
+    npm run dev
+
+
+## Tecnologias Utilizadas
+
+ - [**React**](https://react.dev/): Para construção da interface de usuário.
+ - [**React Icons**](https://github.com/react-icons/react-icons): Biblioteca para utilizar ícones no react.
+ - [**React Toastify**](https://fkhadra.github.io/react-toastify/): Biblioteca para mostrar mensagens (notificações) no estilo "toast" em aplicações React.
+ - [**Vite**](https://vite.dev/): Ferramenta para fazer o build da aplicação.
+ - [**Styled Components**](https://styled-components.com/): Biblioteca de estilização no React que permite escrever CSS diretamente dentro do JavaScript (ou TypeScript), criando componentes com estilos embutidos.
+ - [**TypeScript**](https://www.typescriptlang.org/): Linguagem de programação que adiciona tipagem ao JavaScript.
+
+   
