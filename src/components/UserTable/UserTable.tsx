@@ -8,6 +8,8 @@ import {
   ActionIcons
 } from './styles';
 import { UserData } from '../../types/user';
+import { useNavigate } from "react-router-dom";
+
 
 interface Props {
   users: UserData[];
@@ -15,6 +17,8 @@ interface Props {
 }
 
 const UserTable = ({ users, onDelete }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <TableContainer>
       <Table>
@@ -33,7 +37,7 @@ const UserTable = ({ users, onDelete }: Props) => {
                   <button>
                     <FaEye />
                   </button>
-                  <button>
+                  <button onClick={() => navigate(`/userEdit/${user.id}`)}>
                     <FaEdit />
                   </button>
                   <button onClick={() => onDelete(index)}>

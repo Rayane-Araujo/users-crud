@@ -1,7 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { FiChevronRight } from "react-icons/fi";
 import {
   Container, 
   Content, 
@@ -30,47 +31,63 @@ import EyeIcon from "../../assets/EyeIcon.svg";
 import EyeOffIcon from "../../assets/EyeOffIcon.svg";
 import CancelConfirmationModal from "../../components/Modal/CancelConfirmationModal";
 import { UserFormData } from "../../types/user";
-import { FiChevronRight } from "react-icons/fi";
 
-const UserRegister = () => {
+const UserEdit = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [usuarioIndex, setUsuarioIndex] = useState<number | null>(null);
 
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isValid },
   } = useForm<UserFormData>({ mode: "onChange" });
 
   const senha = watch("senha");
 
   const onSubmit: SubmitHandler<UserFormData> = (data) => {
-    const novoUsuario = {
-      id: crypto.randomUUID(),
+    if (usuarioIndex === null) return;
+
+    const usuarios = JSON.parse(localStorage.getItem("users") || "[]");
+    usuarios[usuarioIndex] = {
+      id: usuarios[usuarioIndex].id,
       nome: data.nome,
       email: data.email,
       matricula: data.matricula,
       senha: data.senha,
     };
 
-    const usuariosSalvos = JSON.parse(localStorage.getItem("users") || "[]");
-    const usuariosAtualizados = [...usuariosSalvos, novoUsuario];
-    localStorage.setItem("users", JSON.stringify(usuariosAtualizados));
-
-    toast.success("Usuário cadastrado com sucesso!");
+    localStorage.setItem("users", JSON.stringify(usuarios));
+    toast.success("Usuário editado com sucesso!");
     navigate("/usuarios");
   };
+
+  useEffect(() => {
+    const usuarios = JSON.parse(localStorage.getItem("users") || "[]");
+    const index = usuarios.findIndex((user: UserFormData) => user.id === id);
+
+    if (index === -1) {
+      toast.error("Usuário não encontrado.");
+      navigate("/usuarios");
+      return;
+    }
+
+    const user = usuarios[index];
+    setUsuarioIndex(index);
+
+    setValue("nome", user.nome);
+    setValue("email", user.email);
+    setValue("matricula", user.matricula);
+    setValue("senha", user.senha);
+    setValue("repetirSenha", user.senha);
+  }, [id, setValue, navigate]);
 
   const handleCancelClick = () => {
     setIsModalOpen(true);
-  };
-
-  const handleConfirmCancel = () => {
-    setIsModalOpen(false);
-    toast.success("Cadastro cancelado com sucesso!");
-    navigate("/usuarios");
   };
 
   return (
@@ -83,12 +100,12 @@ const UserRegister = () => {
             <MiniHeader>
               <span>Usuários</span>
               <FiChevronRight />
-              <span>Cadastrar usuários</span>
+              <span>Editar usuários</span>
             </MiniHeader>
 
             <HeaderTitle>
               <img onClick={() => navigate("/usuarios")} src={ArrowLeft} alt="Voltar" />
-              <Title>Cadastrar Usuários</Title>
+              <Title>Editar Usuários</Title>
             </HeaderTitle>
           </HeaderUsers>
 
@@ -186,12 +203,10 @@ const UserRegister = () => {
 
               <ActionsForm>
                 <Button $outline type="button" onClick={handleCancelClick}>Cancelar</Button>
-                <CancelConfirmationModal
-                  isOpen={isModalOpen}
-                  onClose={() => setIsModalOpen(false)}
-                  onConfirm={handleConfirmCancel}
-                />
-                <Button type="submit" disabled={!isValid} $enabled={isValid}>Cadastrar</Button>
+                <CancelConfirmationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={function (): void {
+                  throw new Error("Function not implemented.");
+                } } />
+                <Button type="submit" disabled={!isValid} $enabled={isValid}>Salvar</Button>
               </ActionsForm>
             </FormSection>
           </Card>
@@ -201,4 +216,4 @@ const UserRegister = () => {
   );
 };
 
-export default UserRegister;
+export default UserEdit;
