@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { FiLogOut } from "react-icons/fi";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {
   HeaderContainer,
   ProfileWrapper,
@@ -11,36 +14,41 @@ import {
   Email,
   Logout,
 } from "./styles";
-import { FiLogOut } from "react-icons/fi";
-import profileImg from "../../assets/profile-picture.png";
-import ArrowUpFilled from "../../assets/arrow-up-filled.svg";
+
 import { UserData } from "../../types/user";
+import profileImg from "../../assets/profile-picture.png";
 
 
 const user: UserData = {
-  name: "Milena Santana Borges",
-  email: "email@dominio.com",
+  nome: "Milena Santana Borges",
+  email: "milena.santana@energy.org.br",
   avatar: profileImg,
+  id: undefined
 };
-
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <HeaderContainer>
-      <ProfileWrapper
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onClick={() => setOpen((prev) => !prev)}
-      >
+      <ProfileWrapper ref={dropdownRef} onClick={() => setOpen((prev) => !prev)}>
         <ProfileImage src={user.avatar} alt="Profile picture" />
         <ArrowIconWrapper>
-          {open ? (
-            <img src={ArrowUpFilled} alt="Seta para cima"/>
-          ) : (
-            <img src={ArrowUpFilled} alt="Seta para cima" />
-          )}
+          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </ArrowIconWrapper>
 
         {open && (
@@ -48,12 +56,12 @@ const Header = () => {
             <UserInfo>
               <ProfileImage src={user.avatar} alt="Profile picture" />
               <InfoText>
-                <Name>{user.name}</Name>
+                <Name>{user.nome}</Name>
                 <Email>{user.email}</Email>
               </InfoText>
             </UserInfo>
             <Logout>
-              <FiLogOut size={16} />
+              <FiLogOut size={18} fontWeight={700}/>
               Sair
             </Logout>
           </DropdownCard>

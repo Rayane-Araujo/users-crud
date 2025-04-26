@@ -3,11 +3,13 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   width: 100%;
-  background-color: white;
-  padding: 1rem;
+  height: 60px;
+  background-color: #ffffff;
+  padding: 0 20px;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: absolute;
 `;
 
@@ -17,17 +19,33 @@ export const ProfileWrapper = styled.div`
   display: inline-block;
 `;
 
+
 export const ProfileImage = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: cover; 
+  background-color: #193B59;
+  border: 2px solid #00AAC1;
+  font-size: 14px;
 `;
 
 export const ArrowIconWrapper = styled.div`
   position: absolute;
-  top: 1.2em;
-  right: -5px;
+  bottom: -4px;
+  right: -4px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+
+  svg {
+    font-size: 14px;
+    color: #969696;
+  }
 `;
 
 export const DropdownCard = styled.div`
@@ -61,7 +79,7 @@ export const Name = styled.p`
 
 export const Email = styled.p`
   font-size: 12px;
-  color: #6b7280;
+  color: #0B2B2679;
 `;
 
 export const Logout = styled.div`
@@ -71,9 +89,10 @@ export const Logout = styled.div`
   margin-top: 1rem;
   padding-top: 0.5rem;
   border-top: 1px solid #e5e7eb;
+  height: 35px;
+  border-radius: 5px;
   color: #0D1931;
   cursor: pointer;
-  font-size: 14px;
 
   &:hover {
     background-color: #AACBC4;
